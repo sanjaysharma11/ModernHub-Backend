@@ -7,5 +7,5 @@ ASP.NET Core 8 Web API for e-commerce backend, containerized with Docker, and de
 
 ## Features
 - REST API endpoints
-- Dockerized for CI/CD
+- Dockerized for CI/CD ok
 - EF Core migrations
