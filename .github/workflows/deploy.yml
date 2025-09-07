@@ -3,7 +3,7 @@ name: CI/CD for ECommerceApi
 on:
   push:
     branches:
-      - main   # Only run on pushes to main branch
+      - master
 
 jobs:
   build-and-deploy:
