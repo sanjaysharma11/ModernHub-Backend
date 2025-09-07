@@ -18,7 +18,3 @@ appsettings.Local.json
 # Git
 .git
 .gitignore
-
-# Docker
-.dockerignore
-Dockerfile
