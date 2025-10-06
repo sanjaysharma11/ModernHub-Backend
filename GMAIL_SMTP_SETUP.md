@@ -39,9 +39,9 @@ Open `appsettings.json` and update these values:
 "Smtp": {
   "Host": "smtp.gmail.com",
   "Port": "587",
-  "Username": "jattsam100@gmail.com",           // ← Your Gmail address
+  "Username": "yourgmail.com",           // ← Your Gmail address
   "Password": "abcdefghijklmnop",               // ← App password from Step 1
-  "FromEmail": "jattsam100@gmail.com",          // ← Your Gmail address
+  "FromEmail": "yourgmail.com",          // ← Your Gmail address
   "FromName": "ModernHub"
 }
 ```
@@ -49,9 +49,9 @@ Open `appsettings.json` and update these values:
 **OR** use environment variables (more secure):
 
 ```powershell
-$env:SMTP__USERNAME = "jattsam100@gmail.com"
+$env:SMTP__USERNAME = "yourgmail.com"
 $env:SMTP__PASSWORD = "abcdefghijklmnop"
-$env:SMTP__FROMEMAIL = "jattsam100@gmail.com"
+$env:SMTP__FROMEMAIL = "yourgmail.com"
 ```
 
 ### Step 3: Test It!
