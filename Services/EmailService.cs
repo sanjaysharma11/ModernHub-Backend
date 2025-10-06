@@ -28,43 +28,58 @@ namespace ECommerceApi.Services
                 throw new InvalidOperationException("SMTP credentials are not configured. Please set Smtp:Username and Smtp:Password in environment variables");
             }
 
-            var smtpClient = new SmtpClient(smtpHost)
-            {
-                Port = smtpPort,
-                Credentials = new NetworkCredential(smtpUsername, smtpPassword),
-                EnableSsl = true,
-                Timeout = 10000, // 10 seconds timeout (instead of default 100 seconds)
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-            };
+            // Try port 587 first, then port 465 if it fails
+            var portsToTry = new[] { smtpPort, 465, 587 }.Distinct().ToArray();
+            Exception? lastException = null;
 
-            var mailMessage = new MailMessage
+            foreach (var port in portsToTry)
             {
-                From = new MailAddress(fromEmail!, fromName),
-                Subject = subject,
-                Body = message,
-                IsBodyHtml = isHtml,
-            };
-            mailMessage.To.Add(toEmail);
+                try
+                {
+                    Console.WriteLine($"📧 Attempting connection to {smtpHost}:{port}...");
+                    var startTime = DateTime.UtcNow;
 
-            Console.WriteLine($"📧 Sending email via {smtpHost}...");
-            var startTime = DateTime.UtcNow;
-            
-            try
-            {
-                await smtpClient.SendMailAsync(mailMessage);
-                var elapsed = (DateTime.UtcNow - startTime).TotalSeconds;
-                Console.WriteLine($"✅ Email sent successfully in {elapsed:F2} seconds");
+                    using var smtpClient = new SmtpClient(smtpHost)
+                    {
+                        Port = port,
+                        Credentials = new NetworkCredential(smtpUsername, smtpPassword),
+                        EnableSsl = true,
+                        Timeout = 20000, // 20 seconds timeout
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                    };
+
+                    using var mailMessage = new MailMessage
+                    {
+                        From = new MailAddress(fromEmail!, fromName),
+                        Subject = subject,
+                        Body = message,
+                        IsBodyHtml = isHtml,
+                    };
+                    mailMessage.To.Add(toEmail);
+
+                    await smtpClient.SendMailAsync(mailMessage);
+                    
+                    var elapsed = (DateTime.UtcNow - startTime).TotalSeconds;
+                    Console.WriteLine($"✅ Email sent successfully via port {port} in {elapsed:F2} seconds");
+                    return; // Success! Exit the method
+                }
+                catch (Exception ex)
+                {
+                    lastException = ex;
+                    Console.WriteLine($"❌ Failed on port {port}: {ex.Message}");
+                    
+                    // If this isn't the last port, try the next one
+                    if (port != portsToTry.Last())
+                    {
+                        Console.WriteLine($"🔄 Retrying with next port...");
+                        await Task.Delay(1000); // Wait 1 second before retry
+                    }
+                }
             }
-            catch (Exception ex)
-            {
-                var elapsed = (DateTime.UtcNow - startTime).TotalSeconds;
-                Console.WriteLine($"❌ Email failed after {elapsed:F2} seconds: {ex.Message}");
-                throw;
-            }
-            finally
-            {
-                mailMessage.Dispose();
-            }
+
+            // All ports failed
+            Console.WriteLine($"❌ All SMTP ports failed. Last error: {lastException?.Message}");
+            throw new InvalidOperationException($"Failed to send email after trying ports: {string.Join(", ", portsToTry)}", lastException);
         }
     }
 }
