@@ -17,9 +17,15 @@ namespace ECommerceApi.Services
             var fromEmail = _config["Smtp:FromEmail"] ?? smtpUsername;
             var fromName = _config["Smtp:FromName"] ?? "ModernHub";
 
+            Console.WriteLine($"📧 Starting email send to: {toEmail}");
+            Console.WriteLine($"📧 SMTP Host: {smtpHost}:{smtpPort}");
+            Console.WriteLine($"📧 SMTP Username: {smtpUsername}");
+            Console.WriteLine($"📧 SMTP Password configured: {!string.IsNullOrEmpty(smtpPassword)}");
+
             if (string.IsNullOrEmpty(smtpUsername) || string.IsNullOrEmpty(smtpPassword))
             {
-                throw new InvalidOperationException("SMTP credentials are not configured. Please set Smtp:Username and Smtp:Password in appsettings.json");
+                Console.WriteLine("❌ SMTP credentials are missing!");
+                throw new InvalidOperationException("SMTP credentials are not configured. Please set Smtp:Username and Smtp:Password in environment variables");
             }
 
             var smtpClient = new SmtpClient(smtpHost)
@@ -27,6 +33,8 @@ namespace ECommerceApi.Services
                 Port = smtpPort,
                 Credentials = new NetworkCredential(smtpUsername, smtpPassword),
                 EnableSsl = true,
+                Timeout = 10000, // 10 seconds timeout (instead of default 100 seconds)
+                DeliveryMethod = SmtpDeliveryMethod.Network,
             };
 
             var mailMessage = new MailMessage
@@ -38,7 +46,25 @@ namespace ECommerceApi.Services
             };
             mailMessage.To.Add(toEmail);
 
-            await smtpClient.SendMailAsync(mailMessage);
+            Console.WriteLine($"📧 Sending email via {smtpHost}...");
+            var startTime = DateTime.UtcNow;
+            
+            try
+            {
+                await smtpClient.SendMailAsync(mailMessage);
+                var elapsed = (DateTime.UtcNow - startTime).TotalSeconds;
+                Console.WriteLine($"✅ Email sent successfully in {elapsed:F2} seconds");
+            }
+            catch (Exception ex)
+            {
+                var elapsed = (DateTime.UtcNow - startTime).TotalSeconds;
+                Console.WriteLine($"❌ Email failed after {elapsed:F2} seconds: {ex.Message}");
+                throw;
+            }
+            finally
+            {
+                mailMessage.Dispose();
+            }
         }
     }
 }

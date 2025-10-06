@@ -205,8 +205,23 @@ namespace ECommerceApi.Controllers
 
             try
             {
-                await _emailService.SendEmailAsync(request.Email, "Password Reset Request", message, isHtml: true);
-                Console.WriteLine($"✅ Password reset email sent successfully to {request.Email}");
+                Console.WriteLine($"🔄 Attempting to send password reset email to {request.Email}");
+                
+                // Add timeout to prevent hanging
+                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(15));
+                var emailTask = _emailService.SendEmailAsync(request.Email, "Password Reset Request", message, isHtml: true);
+                
+                await Task.WhenAny(emailTask, Task.Delay(15000, cts.Token));
+                
+                if (emailTask.IsCompleted)
+                {
+                    await emailTask; // Await to catch any exceptions
+                    Console.WriteLine($"✅ Password reset email sent successfully to {request.Email}");
+                }
+                else
+                {
+                    Console.WriteLine($"⚠️ Email sending timed out after 15 seconds for {request.Email}");
+                }
             }
             catch (Exception ex)
             {
@@ -264,8 +279,23 @@ namespace ECommerceApi.Controllers
 
             try
             {
-                await _emailService.SendEmailAsync(request.Email, "Admin Password Reset Request", message, isHtml: true);
-                Console.WriteLine($"✅ Admin password reset email sent successfully to {request.Email}");
+                Console.WriteLine($"🔄 Attempting to send admin password reset email to {request.Email}");
+                
+                // Add timeout to prevent hanging
+                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(15));
+                var emailTask = _emailService.SendEmailAsync(request.Email, "Admin Password Reset Request", message, isHtml: true);
+                
+                await Task.WhenAny(emailTask, Task.Delay(15000, cts.Token));
+                
+                if (emailTask.IsCompleted)
+                {
+                    await emailTask; // Await to catch any exceptions
+                    Console.WriteLine($"✅ Admin password reset email sent successfully to {request.Email}");
+                }
+                else
+                {
+                    Console.WriteLine($"⚠️ Admin email sending timed out after 15 seconds for {request.Email}");
+                }
             }
             catch (Exception ex)
             {
