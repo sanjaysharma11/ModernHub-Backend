@@ -51,6 +51,23 @@ builder.Services.AddScoped<EmailService>();
 builder.Services.AddScoped<RazorpayService>();
 builder.Services.AddScoped<CloudinaryService>();
 
+// --------------------- Resend Email Service ---------------------
+var resendApiKey = configuration["Resend:ApiKey"] ?? Environment.GetEnvironmentVariable("RESEND_API_KEY");
+if (string.IsNullOrEmpty(resendApiKey))
+{
+    Console.WriteLine("⚠️ WARNING: Resend API key not configured. Email sending will fail.");
+}
+else
+{
+    builder.Services.AddOptions();
+    builder.Services.Configure<Resend.ResendClientOptions>(o =>
+    {
+        o.ApiToken = resendApiKey;
+    });
+    builder.Services.AddHttpClient<Resend.IResend, Resend.ResendClient>();
+    Console.WriteLine("✅ Resend API configured successfully");
+}
+
 builder.Services.AddControllers();
 
 // --------------------- CORS Policy ---------------------

@@ -525,3 +525,6 @@ C:\Users\Sanjay Kumar Sharma\Downloads\ECOMMERCE E.NET\ECommerceApi(PRODUCTION)\
 C:\Users\Sanjay Kumar Sharma\Downloads\ECOMMERCE E.NET\ECommerceApi(PRODUCTION)\obj\Debug\net8.0\ECommerceApi.genruntimeconfig.cache
 C:\Users\Sanjay Kumar Sharma\Downloads\ECOMMERCE E.NET\ECommerceApi(PRODUCTION)\obj\Debug\net8.0\ref\ECommerceApi.dll
 C:\Users\Sanjay Kumar Sharma\Downloads\ECOMMERCE E.NET\ECommerceApi(PRODUCTION)\obj\Debug\net8.0\ECommerceApi.sourcelink.json
+C:\Users\Sanjay Kumar Sharma\Downloads\ECOMMERCE E.NET\ECommerceApi(PRODUCTION)\bin\Debug\net8.0\Microsoft.AspNetCore.WebUtilities.dll
+C:\Users\Sanjay Kumar Sharma\Downloads\ECOMMERCE E.NET\ECommerceApi(PRODUCTION)\bin\Debug\net8.0\Microsoft.Net.Http.Headers.dll
+C:\Users\Sanjay Kumar Sharma\Downloads\ECOMMERCE E.NET\ECommerceApi(PRODUCTION)\bin\Debug\net8.0\Resend.dll

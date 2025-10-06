@@ -156,6 +156,23 @@
           }
         }
       },
+      "Microsoft.AspNetCore.WebUtilities/8.0.19": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Net.Http.Headers": "8.0.19",
+          "System.IO.Pipelines": "8.0.0"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.AspNetCore.WebUtilities.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.AspNetCore.WebUtilities.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.Bcl.AsyncInterfaces/7.0.0": {
         "type": "package",
         "compile": {
@@ -1056,6 +1073,22 @@
           }
         }
       },
+      "Microsoft.Net.Http.Headers/8.0.19": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "8.0.0"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.Net.Http.Headers.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Net.Http.Headers.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.NETCore.Platforms/1.1.1": {
         "type": "package",
         "compile": {
@@ -1194,6 +1227,23 @@
         },
         "runtime": {
           "lib/net45/Razorpay.dll": {}
+        }
+      },
+      "Resend/0.1.6": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.WebUtilities": "8.0.19",
+          "Microsoft.Extensions.Options": "8.0.0"
+        },
+        "compile": {
+          "lib/net8.0/Resend.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Resend.dll": {
+            "related": ".xml"
+          }
         }
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
@@ -2806,6 +2856,21 @@
         "lib/net8.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.xml",
         "microsoft.aspnetcore.identity.entityframeworkcore.8.0.0.nupkg.sha512",
         "microsoft.aspnetcore.identity.entityframeworkcore.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.WebUtilities/8.0.19": {
+      "sha512": "fB3ikXAlz6yQuy029zDAS3J4qW3o6HQYL+kqsTjhiog1JwgpfkRTELCTGxMv7fL6VljFtfNJIQ/2684soCuI9A==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.webutilities/8.0.19",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net8.0/Microsoft.AspNetCore.WebUtilities.dll",
+        "lib/net8.0/Microsoft.AspNetCore.WebUtilities.xml",
+        "microsoft.aspnetcore.webutilities.8.0.19.nupkg.sha512",
+        "microsoft.aspnetcore.webutilities.nuspec"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/7.0.0": {
@@ -4773,6 +4838,21 @@
         "microsoft.identitymodel.tokens.nuspec"
       ]
     },
+    "Microsoft.Net.Http.Headers/8.0.19": {
+      "sha512": "f2hSRVq5rR97YlfGcScVMXJvQpNpbbpnZjwsZ4kmN5/T3xk9DBVt1SPZDJIPrp/sSfdjz8aQtD8jKLXHyoHVng==",
+      "type": "package",
+      "path": "microsoft.net.http.headers/8.0.19",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net8.0/Microsoft.Net.Http.Headers.dll",
+        "lib/net8.0/Microsoft.Net.Http.Headers.xml",
+        "microsoft.net.http.headers.8.0.19.nupkg.sha512",
+        "microsoft.net.http.headers.nuspec"
+      ]
+    },
     "Microsoft.NETCore.Platforms/1.1.1": {
       "sha512": "TMBuzAHpTenGbGgk0SMTwyEkyijY/Eae4ZGsFNYJvAr/LDn1ku3Etp3FPxChmDp5HHF3kzJuoaa08N0xjqAJfQ==",
       "type": "package",
@@ -4957,6 +5037,21 @@
         "lib/net45/Razorpay.dll",
         "razorpay.3.0.0.nupkg.sha512",
         "razorpay.nuspec"
+      ]
+    },
+    "Resend/0.1.6": {
+      "sha512": "jV/VViNS3vUvkMMN5pT8+KzOErs4S4/3DG0uc3QgbH4InDOsgHEuU0Izep/IrIC2SLfBgHD/H5Lkt75lofFVnA==",
+      "type": "package",
+      "path": "resend/0.1.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net8.0/Resend.dll",
+        "lib/net8.0/Resend.xml",
+        "resend.0.1.6.nupkg.sha512",
+        "resend.nuspec"
       ]
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
@@ -8199,6 +8294,7 @@
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.0",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 9.0.4",
       "Razorpay >= 3.0.0",
+      "Resend >= 0.1.6",
       "SendGrid >= 9.28.1",
       "Swashbuckle.AspNetCore >= 6.5.0"
     ]
@@ -8296,6 +8392,10 @@
           "Razorpay": {
             "target": "Package",
             "version": "[3.0.0, )"
+          },
+          "Resend": {
+            "target": "Package",
+            "version": "[0.1.6, )"
           },
           "SendGrid": {
             "target": "Package",
