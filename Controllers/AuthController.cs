@@ -206,11 +206,14 @@ namespace ECommerceApi.Controllers
             try
             {
                 await _emailService.SendEmailAsync(request.Email, "Password Reset Request", message, isHtml: true);
+                Console.WriteLine($"✅ Password reset email sent successfully to {request.Email}");
             }
             catch (Exception ex)
             {
-                // Log the error but don't reveal it to the user
-                // _logger.LogError(ex, "Failed to send password reset email to {Email}", request.Email);
+                // Log the error for debugging
+                Console.WriteLine($"❌ ERROR sending email to {request.Email}: {ex.Message}");
+                Console.WriteLine($"Stack trace: {ex.StackTrace}");
+                // Still return success to user (security best practice)
             }
 
             return Ok(new { message = "If the email exists, a reset link has been sent." });
@@ -262,11 +265,14 @@ namespace ECommerceApi.Controllers
             try
             {
                 await _emailService.SendEmailAsync(request.Email, "Admin Password Reset Request", message, isHtml: true);
+                Console.WriteLine($"✅ Admin password reset email sent successfully to {request.Email}");
             }
             catch (Exception ex)
             {
-                // Log the error but don't reveal it to the user
-                // _logger.LogError(ex, "Failed to send admin password reset email to {Email}", request.Email);
+                // Log the error for debugging
+                Console.WriteLine($"❌ ERROR sending admin email to {request.Email}: {ex.Message}");
+                Console.WriteLine($"Stack trace: {ex.StackTrace}");
+                // Still return success to user (security best practice)
             }
 
             return Ok(new { message = "If the email exists, a reset link has been sent." });
