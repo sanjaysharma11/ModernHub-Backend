@@ -518,10 +518,10 @@ C:\Users\Sanjay Kumar Sharma\Downloads\ECOMMERCE E.NET\ECommerceApi(PRODUCTION)\
 C:\Users\Sanjay Kumar Sharma\Downloads\ECOMMERCE E.NET\ECommerceApi(PRODUCTION)\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\Sanjay Kumar Sharma\Downloads\ECOMMERCE E.NET\ECommerceApi(PRODUCTION)\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Sanjay Kumar Sharma\Downloads\ECOMMERCE E.NET\ECommerceApi(PRODUCTION)\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\Sanjay Kumar Sharma\Downloads\ECOMMERCE E.NET\ECommerceApi(PRODUCTION)\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\Sanjay Kumar Sharma\Downloads\ECOMMERCE E.NET\ECommerceApi(PRODUCTION)\obj\Debug\net8.0\ECommerc.880F12AD.Up2Date
 C:\Users\Sanjay Kumar Sharma\Downloads\ECOMMERCE E.NET\ECommerceApi(PRODUCTION)\obj\Debug\net8.0\ECommerceApi.dll
 C:\Users\Sanjay Kumar Sharma\Downloads\ECOMMERCE E.NET\ECommerceApi(PRODUCTION)\obj\Debug\net8.0\refint\ECommerceApi.dll
 C:\Users\Sanjay Kumar Sharma\Downloads\ECOMMERCE E.NET\ECommerceApi(PRODUCTION)\obj\Debug\net8.0\ECommerceApi.pdb
 C:\Users\Sanjay Kumar Sharma\Downloads\ECOMMERCE E.NET\ECommerceApi(PRODUCTION)\obj\Debug\net8.0\ECommerceApi.genruntimeconfig.cache
 C:\Users\Sanjay Kumar Sharma\Downloads\ECOMMERCE E.NET\ECommerceApi(PRODUCTION)\obj\Debug\net8.0\ref\ECommerceApi.dll
+C:\Users\Sanjay Kumar Sharma\Downloads\ECOMMERCE E.NET\ECommerceApi(PRODUCTION)\obj\Debug\net8.0\ECommerceApi.sourcelink.json

@@ -1,5 +1,5 @@
-using SendGrid;
-using SendGrid.Helpers.Mail;
+using System.Net;
+using System.Net.Mail;
 
 namespace ECommerceApi.Services
 {
@@ -10,12 +10,35 @@ namespace ECommerceApi.Services
 
         public async Task SendEmailAsync(string toEmail, string subject, string message, bool isHtml)
         {
-            var apiKey = _config["SendGrid:ApiKey"];
-            var client = new SendGridClient(apiKey);
-            var from = new EmailAddress(_config["SendGrid:FromEmail"], "E-Commerce App");
-            var to = new EmailAddress(toEmail);
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, message, message);
-            await client.SendEmailAsync(msg);
+            var smtpHost = _config["Smtp:Host"] ?? "smtp.gmail.com";
+            var smtpPort = int.Parse(_config["Smtp:Port"] ?? "587");
+            var smtpUsername = _config["Smtp:Username"];
+            var smtpPassword = _config["Smtp:Password"];
+            var fromEmail = _config["Smtp:FromEmail"] ?? smtpUsername;
+            var fromName = _config["Smtp:FromName"] ?? "ModernHub";
+
+            if (string.IsNullOrEmpty(smtpUsername) || string.IsNullOrEmpty(smtpPassword))
+            {
+                throw new InvalidOperationException("SMTP credentials are not configured. Please set Smtp:Username and Smtp:Password in appsettings.json");
+            }
+
+            var smtpClient = new SmtpClient(smtpHost)
+            {
+                Port = smtpPort,
+                Credentials = new NetworkCredential(smtpUsername, smtpPassword),
+                EnableSsl = true,
+            };
+
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress(fromEmail!, fromName),
+                Subject = subject,
+                Body = message,
+                IsBodyHtml = isHtml,
+            };
+            mailMessage.To.Add(toEmail);
+
+            await smtpClient.SendMailAsync(mailMessage);
         }
     }
 }
